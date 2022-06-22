@@ -63,6 +63,8 @@ def prepare_chatbot_conversation_for_queue_number(conversation_id: str) -> None:
 
 def main():
     diary_number = os.environ.get("MIGRI_DIARY_NUMBER")
+    if diary_number is None:
+        raise ValueError("Empty diary number")
     conversation_id = get_conversation_id()
     prepare_chatbot_conversation_for_queue_number(conversation_id)
     result = QueueResult.from_response(
